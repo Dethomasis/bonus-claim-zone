@@ -1,0 +1,740 @@
+.shein-page {
+    --bg: #f5d8b0;
+    --surface: #fef6e3;
+    --surface2: #fbe6c8;
+    --text: #2f3033;
+    --muted: #6b6770;
+    --red: #f45646;
+    --red-bright: #f87060;
+    --red-deep: #d33a2a;
+    --gold: #d97706;
+    --gold-bright: #ea7b0a;
+    --red-glow: rgba(244, 86, 70, 0.1);
+    --red-glow-strong: rgba(244, 86, 70, 0.22);
+    --gold-glow: rgba(217, 119, 6, 0.1);
+    --border: rgba(47, 48, 51, 0.1);
+    --border-red: rgba(244, 86, 70, 0.22);
+    --shadow-sm: 0 2px 8px rgba(244, 86, 70, 0.08);
+    --shadow-md: 0 8px 24px rgba(244, 86, 70, 0.12);
+    --shadow-lg: 0 12px 40px rgba(244, 86, 70, 0.18);
+    --radius: 20px;
+    --radius-sm: 14px;
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.shein-page * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== AMBIENT ===== */
+.shein-page .ambient {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+.shein-page .ambient::before {
+    content: "";
+    position: absolute;
+    width: 720px;
+    height: 720px;
+    top: -260px;
+    left: -200px;
+    background: radial-gradient(circle, rgba(244, 86, 70, 0.08) 0%, transparent 70%);
+    animation: sh-drift1 22s ease-in-out infinite;
+}
+.shein-page .ambient::after {
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    bottom: -200px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
+    animation: sh-drift2 26s ease-in-out infinite;
+}
+@keyframes sh-drift1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(60px, 80px); }
+}
+@keyframes sh-drift2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-40px, -60px); }
+}
+
+/* ===== UTILITY ===== */
+@keyframes sh-fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes sh-slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sh-shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+/* ===== AGE GATE ===== */
+.shein-page .age-quiz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+.shein-page .quiz-wrap {
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+}
+.shein-page .quiz-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border-red);
+    border-radius: 100px;
+    padding: 8px 18px 8px 10px;
+    margin-bottom: 28px;
+    animation: sh-slideUp 0.4s ease-out both;
+}
+.shein-page .quiz-badge img {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.shein-page .quiz-badge span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red-bright);
+    letter-spacing: 0.3px;
+}
+.shein-page .quiz-heading {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: clamp(38px, 10vw, 56px);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 16px;
+    animation: sh-slideUp 0.5s ease-out 0.1s both;
+}
+.shein-page .quiz-heading .accent {
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.shein-page .quiz-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    animation: sh-slideUp 0.5s ease-out 0.15s both;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.shein-page .live-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff0e0;
+    border: 1px solid rgba(244, 86, 70, 0.18);
+    border-radius: 14px;
+    padding: 14px 22px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-sm);
+    animation: sh-slideUp 0.5s ease-out 0.2s both, sh-livePulse 2.4s ease-in-out infinite;
+}
+@keyframes sh-livePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(244, 86, 70, 0.18); }
+    50% { box-shadow: 0 0 0 6px rgba(244, 86, 70, 0); }
+}
+.shein-page .live-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--red), 0 0 20px rgba(244, 86, 70, 0.5);
+    animation: sh-blink 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+@keyframes sh-blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+.shein-page .live-counter span {
+    font-size: 15px;
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: 0.1px;
+}
+.shein-page .live-counter span .live-num {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--red-deep);
+    font-variant-numeric: tabular-nums;
+    margin-right: 4px;
+}
+.shein-page .age-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: sh-slideUp 0.5s ease-out 0.25s both;
+}
+.shein-page .age-btn {
+    display: block;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    text-align: center;
+    width: 100%;
+}
+.shein-page .age-btn.primary {
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+    box-shadow: 0 10px 28px rgba(244, 86, 70, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.shein-page .age-btn.primary .age-label { color: #fff; }
+.shein-page .age-btn.primary .age-desc { color: rgba(255, 255, 255, 0.85); }
+.shein-page .age-btn.primary:active { transform: scale(0.97); }
+.shein-page .age-btn.secondary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+.shein-page .age-btn.secondary:active {
+    transform: scale(0.97);
+    border-color: var(--border-red);
+}
+.shein-page .age-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+.shein-page .age-desc {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+}
+.shein-page .age-btn.primary::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    animation: sh-shimmer 3s ease-in-out infinite;
+}
+
+/* ===== MAIN CONTENT ===== */
+.shein-page .scroll-content {
+    display: none;
+    opacity: 0;
+}
+.shein-page .scroll-content.active {
+    display: block;
+    animation: sh-fadeIn 0.5s ease-out forwards;
+}
+.shein-page .main-wrap {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 100px 20px 120px;
+    position: relative;
+    z-index: 1;
+}
+.shein-page .logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+.shein-page .logo-pill {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    background: var(--surface);
+}
+.shein-page .logo-pill img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.shein-page .countdown-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #fff1f1;
+    border: 1px solid rgba(239, 68, 68, 0.18);
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+}
+.shein-page .countdown-bar svg {
+    width: 14px;
+    height: 14px;
+    color: #dc2626;
+    flex-shrink: 0;
+}
+.shein-page .countdown-bar span {
+    font-size: 13px;
+    color: #b91c1c;
+    font-weight: 600;
+}
+.shein-page .countdown-bar .timer {
+    font-variant-numeric: tabular-nums;
+    color: #dc2626;
+    font-weight: 700;
+}
+.shein-page .main-heading {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: clamp(32px, 8vw, 44px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.shein-page .main-heading .g {
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.shein-page .dollar-counter {
+    text-align: center;
+    margin-bottom: 8px;
+}
+.shein-page .dollar-counter span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red-deep);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3px;
+}
+.shein-page .main-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 32px;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.shein-page .cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+    color: #fff !important;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    border: 0;
+    border-radius: var(--radius);
+    padding: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(244, 86, 70, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    transition: all 0.3s ease;
+    animation: sh-ctaPulse 3s ease-in-out infinite;
+}
+.shein-page .cta:active { transform: scale(0.97); }
+.shein-page .cta-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+.shein-page .cta::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    animation: sh-shimmer 3s ease-in-out infinite;
+}
+@keyframes sh-ctaPulse {
+    0%, 100% { box-shadow: 0 10px 28px rgba(244, 86, 70, 0.28); }
+    50% { box-shadow: 0 14px 40px rgba(244, 86, 70, 0.42); }
+}
+.shein-page .payout-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+    margin-bottom: 36px;
+}
+.shein-page .payout-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+.shein-page .payout-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: 4px;
+    font-weight: 500;
+}
+
+/* ===== NOTIFICATION TOASTS ===== */
+.shein-page .notif-zone {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: calc(100% - 32px);
+    max-width: 400px;
+    pointer-events: none;
+    height: 70px;
+}
+.shein-page .notif-toast {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-lg);
+    animation: sh-toastIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    pointer-events: auto;
+}
+@keyframes sh-toastIn {
+    from { opacity: 0; transform: translateY(-20px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes sh-toastOut {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-10px) scale(0.96); }
+}
+.shein-page .notif-toast.leaving {
+    animation: sh-toastOut 0.3s ease-in forwards;
+}
+.shein-page .notif-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+.shein-page .notif-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.shein-page .notif-body {
+    flex: 1;
+    min-width: 0;
+}
+.shein-page .notif-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.shein-page .notif-desc {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.shein-page .notif-time {
+    font-size: 10px;
+    color: var(--muted);
+    opacity: 0.6;
+    flex-shrink: 0;
+    margin-left: 2px;
+}
+
+/* Steps card */
+.shein-page .steps-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+}
+.shein-page .steps-title {
+    padding: 18px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+}
+.shein-page .step-item {
+    display: flex;
+    gap: 14px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+}
+.shein-page .step-item:last-child { border-bottom: none; }
+.shein-page .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(244, 86, 70, 0.25);
+}
+.shein-page .step-text b {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+}
+.shein-page .step-text span {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+/* Urgency banner */
+.shein-page .urgency {
+    background: #fffaf0;
+    border: 1px solid rgba(245, 158, 11, 0.22);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.shein-page .urgency-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.shein-page .urgency-text {
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.5;
+    font-weight: 500;
+}
+.shein-page .urgency-text strong {
+    color: #b45309;
+    font-weight: 700;
+}
+.shein-page .required-badge {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 6px;
+    position: relative;
+    top: -1px;
+}
+.shein-page .urgency-tip {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(180, 83, 9, 0.15);
+    font-size: 11.5px;
+    color: #a16207;
+    line-height: 1.5;
+    font-weight: 500;
+}
+.shein-page .urgency-tip strong {
+    color: #92400e;
+    font-weight: 700;
+}
+
+/* Trust bar */
+.shein-page .trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px 0;
+    margin-top: 4px;
+}
+.shein-page .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.shein-page .trust-item svg {
+    width: 14px;
+    height: 14px;
+    color: var(--red-deep);
+    opacity: 0.85;
+}
+.shein-page .trust-item span {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+}
+.shein-page .foot {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.7;
+    margin-top: 8px;
+    padding-bottom: 20px;
+}
+
+/* ===== STICKY BOTTOM CTA ===== */
+.shein-page .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: linear-gradient(to top, var(--bg) 60%, transparent);
+    padding: 16px 20px;
+    display: none;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.shein-page .sticky-cta.visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+.shein-page .sticky-cta .cta-sm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 440px;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%);
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    border: 0;
+    border-radius: 16px;
+    padding: 16px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 -2px 18px rgba(244, 86, 70, 0.22), 0 10px 24px rgba(244, 86, 70, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.shein-page .sticky-cta .cta-sm:active { transform: scale(0.97); }
+.shein-page .sticky-cta .cta-sm::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    animation: sh-shimmer 3s ease-in-out infinite;
+}
+.shein-page .sticky-cta .cta-sm svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+    .shein-page .age-quiz { padding: 32px 16px; }
+    .shein-page .quiz-heading { font-size: clamp(34px, 9vw, 48px); }
+    .shein-page .main-wrap { padding: 90px 16px 120px; }
+    .shein-page .logo-pill { width: 48px; height: 48px; border-radius: 14px; }
+    .shein-page .main-heading { font-size: clamp(28px, 7.5vw, 38px); }
+    .shein-page .cta { padding: 18px; font-size: 15px; border-radius: 16px; }
+    .shein-page .step-item { padding: 16px; }
+}
+@media (max-width: 375px) {
+    .shein-page .quiz-heading { font-size: 32px; }
+    .shein-page .main-heading { font-size: 26px; }
+    .shein-page .logo-pill { width: 44px; height: 44px; border-radius: 12px; }
+    .shein-page .cta { padding: 16px; font-size: 14px; }
+    .shein-page .step-item { padding: 14px; gap: 10px; }
+    .shein-page .step-num { width: 24px; height: 24px; font-size: 12px; border-radius: 7px; }
+    .shein-page .step-text b { font-size: 14px; }
+    .shein-page .step-text span { font-size: 12px; }
+    .shein-page .urgency { padding: 14px; }
+    .shein-page .urgency-text { font-size: 12px; }
+    .shein-page .trust-bar { gap: 14px; }
+    .shein-page .trust-item span { font-size: 10px; }
+    .shein-page .notif-toast { padding: 12px 14px; border-radius: 14px; gap: 10px; }
+    .shein-page .notif-icon { width: 32px; height: 32px; border-radius: 8px; }
+    .shein-page .notif-title { font-size: 12px; }
+    .shein-page .notif-desc { font-size: 11px; }
+    .shein-page .sticky-cta .cta-sm { padding: 14px 16px; font-size: 14px; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+    .shein-page .age-quiz { min-height: auto; padding: 20px 24px; }
+    .shein-page .main-wrap { padding: 20px 24px 100px; }
+}
+@media (hover: none) and (pointer: coarse) {
+    .shein-page .age-btn:hover { transform: none; }
+    .shein-page .cta:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .shein-page *, .shein-page *::before, .shein-page *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
