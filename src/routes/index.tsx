@@ -253,10 +253,7 @@ function SheinBonus() {
               <div className="step-item">
                 <div className="step-num">3</div>
                 <div className="step-text">
-                  <b>
-                    Complete 3–5 Sponsor Deals to Unlock Your Cash
-                    <span className="required-badge">REQUIRED</span>
-                  </b>
+                  <b>Complete 3–5 Sponsor Deals to Unlock Your Cash</b>
                   <span>
                     Pick any deals from our partners — then your full balance unlocks and is yours
                     to cash out
