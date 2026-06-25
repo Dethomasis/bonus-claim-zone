@@ -114,8 +114,7 @@ function SheinBonus() {
   const ss = String(secondsLeft % 60).padStart(2, "0");
 
   const handleClaim = () => {
-    // Replace with your offer URL.
-    window.alert("Continue to claim your $750 Shein bonus!");
+    window.location.href = "https://trksy.org/aff_c?offer_id=1146&aff_id=165496";
   };
 
   return (
